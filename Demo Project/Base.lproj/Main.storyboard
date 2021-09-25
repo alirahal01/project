@@ -38,6 +38,11 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="sign up"/>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mhS-Sm-KGx">
+                                <rect key="frame" x="182" y="689" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -45,6 +50,7 @@
                     <navigationItem key="navigationItem" id="CMA-XX-cJG"/>
                     <connections>
                         <outlet property="emailTextfield" destination="RHn-rk-Vhw" id="Pci-Dy-Boi"/>
+                        <outlet property="goToHomePage" destination="mhS-Sm-KGx" id="xil-3C-Ly3"/>
                         <outlet property="passwordTextfield" destination="SEb-Ez-q10" id="fIW-GH-cDV"/>
                         <outlet property="registerButton" destination="lvk-jE-f43" id="rFP-Is-7cP"/>
                         <outlet property="signInButton" destination="Ruu-L0-1xv" id="06n-3o-yvO"/>
@@ -57,7 +63,7 @@
         <!--Register View Controller-->
         <scene sceneID="WFy-cZ-BXc">
             <objects>
-                <viewController storyboardIdentifier="registerVC" id="KWX-eh-KOf" customClass="RegisterViewController" customModule="Demo_Project" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="registerVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="KWX-eh-KOf" customClass="RegisterViewController" customModule="Demo_Project" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6SF-uS-Bsc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -99,6 +105,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wEA-Ov-hLc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1718.840579710145" y="93.75"/>
+        </scene>
+        <!--Home Page View Controller-->
+        <scene sceneID="g2S-dm-y61">
+            <objects>
+                <viewController storyboardIdentifier="homePageVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="rRR-YX-avg" customClass="HomePageViewController" customModule="Demo_Project" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Sfo-cs-Dil">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="vcf-UL-vq0"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QAK-Lv-x2V" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2423" y="94"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ozd-xx-KHe">

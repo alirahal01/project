@@ -26,6 +26,7 @@ class LoginViewController: UIViewController, ControllerType {
     @IBOutlet weak var emailTextfield: UITextField!
     @IBOutlet weak var signInButton: UIButton!
     @IBOutlet weak var registerButton: UIButton!
+    @IBOutlet weak var goToHomePage: UIButton!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -51,6 +52,12 @@ class LoginViewController: UIViewController, ControllerType {
         registerButton.rx.tap.subscribe { _ in
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let controller = storyboard.instantiateViewController(withIdentifier: "registerVC") as! RegisterViewController
+            self.navigationController?.pushViewController(controller, animated: true)
+        }.disposed(by: disposeBag)
+        
+        goToHomePage.rx.tap.subscribe { _ in
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let controller = storyboard.instantiateViewController(withIdentifier: "homePageVC") as! HomePageViewController
             self.navigationController?.pushViewController(controller, animated: true)
         }.disposed(by: disposeBag)
         
