@@ -32,13 +32,14 @@ class LoginViewModel: ViewModelProtocol {
     struct Input {
         let email: AnyObserver<String>
         let password: AnyObserver<String>
-        let age: AnyObserver<Int>
         let signInDidTap: AnyObserver<Void>
     }
     struct Output {
         let RegisterResultObservable: Observable<User>
         let errorsObservable: Observable<Error>
         let isValid: Observable<Bool>
+        let goToRegister: Observable<Void>
+        
     }
     // MARK: - Public properties
     let input: Input
@@ -47,12 +48,12 @@ class LoginViewModel: ViewModelProtocol {
     // MARK: - Private properties
     private let emailSubject = PublishSubject<String>()
     private let passwordSubject = PublishSubject<String>()
-    private let ageSubject = PublishSubject<Int>()
     private let signInDidTapSubject = PublishSubject<Void>()
     private let RegisterResultSubject = PublishSubject<User>()
     private let errorsSubject = PublishSubject<Error>()
     private let disposeBag = DisposeBag()
     private var isValid = BehaviorSubject<Bool>(value: false)
+    private let goToRegisterVC = PublishSubject<Void>()
     
     private var credentialsObservable: Observable<Credentials> {
         return Observable.combineLatest(emailSubject.asObservable(), passwordSubject.asObservable()) { (email, password) in
@@ -64,18 +65,17 @@ class LoginViewModel: ViewModelProtocol {
     init() {
         
         input = Input(email: emailSubject.asObserver(),
-                      password: passwordSubject.asObserver(), age: ageSubject.asObserver(),
+                      password: passwordSubject.asObserver(),
                       signInDidTap: signInDidTapSubject.asObserver())
         
         output = Output(RegisterResultObservable: RegisterResultSubject.asObservable(),
-                        errorsObservable: errorsSubject.asObservable(), isValid: isValid.asObservable())
+                        errorsObservable: errorsSubject.asObservable(), isValid: isValid.asObservable(), goToRegister: goToRegisterVC.asObservable())
         
         
-        Observable.combineLatest(emailSubject.asObservable(),passwordSubject.asObservable(),ageSubject.asObservable()){ email,password,age in
+        Observable.combineLatest(emailSubject.asObservable(),passwordSubject.asObservable()){ email,password in
             let passwordTextLengthValid = self.validateLength(text: password, size: (6,15))
             let validEmailFormat = self.validatePattern(text: email)
-            let validAge = age < 99 && age > 18
-            return passwordTextLengthValid && validEmailFormat && validAge
+            return passwordTextLengthValid && validEmailFormat
         }.bind(to: isValid).disposed(by: disposeBag)
         
         signInDidTapSubject

@@ -18,6 +18,7 @@
 		15430F3C26FF0F8200546BB5 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15430F3B26FF0F8200546BB5 /* LoginViewModel.swift */; };
 		15430F3E26FF113700546BB5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15430F3D26FF113700546BB5 /* LoginViewController.swift */; };
 		15430F4226FF679E00546BB5 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15430F4126FF679E00546BB5 /* RegisterViewModel.swift */; };
+		15430F4426FF79AF00546BB5 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15430F4326FF79AE00546BB5 /* RegisterViewController.swift */; };
 		284467F156B2DDE679F5205A /* Pods_Demo_Project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 693C269F5CA8F80B72B583F6 /* Pods_Demo_Project.framework */; };
 		684DDB32699D5627A232CDAC /* Pods_Demo_Project_Demo_ProjectUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D0427EE783ADC22C6126F0C /* Pods_Demo_Project_Demo_ProjectUITests.framework */; };
 		F87B25FC2D4DEB5AFE92ED38 /* Pods_Demo_ProjectTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B62EC43562E57977936C679 /* Pods_Demo_ProjectTests.framework */; };
@@ -58,6 +59,7 @@
 		15430F3B26FF0F8200546BB5 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		15430F3D26FF113700546BB5 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		15430F4126FF679E00546BB5 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
+		15430F4326FF79AE00546BB5 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		21D0A8F96D0FE7BC04B8BF00 /* Pods-Demo Project.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo Project.debug.xcconfig"; path = "Target Support Files/Pods-Demo Project/Pods-Demo Project.debug.xcconfig"; sourceTree = "<group>"; };
 		3695492265C9C435A67D20AE /* Pods-Demo Project-Demo ProjectUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo Project-Demo ProjectUITests.debug.xcconfig"; path = "Target Support Files/Pods-Demo Project-Demo ProjectUITests/Pods-Demo Project-Demo ProjectUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		46AE0F93B6D0EA936ED1BBEB /* Pods-Demo ProjectTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo ProjectTests.release.xcconfig"; path = "Target Support Files/Pods-Demo ProjectTests/Pods-Demo ProjectTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 			isa = PBXGroup;
 			children = (
 				15430F4126FF679E00546BB5 /* RegisterViewModel.swift */,
+				15430F4326FF79AE00546BB5 /* RegisterViewController.swift */,
 			);
 			path = Register;
 			sourceTree = "<group>";
@@ -433,6 +436,7 @@
 			files = (
 				15430F3E26FF113700546BB5 /* LoginViewController.swift in Sources */,
 				15430F4226FF679E00546BB5 /* RegisterViewModel.swift in Sources */,
+				15430F4426FF79AF00546BB5 /* RegisterViewController.swift in Sources */,
 				15430F1226FF0F6300546BB5 /* Demo_Project.xcdatamodeld in Sources */,
 				15430F0826FF0F6300546BB5 /* AppDelegate.swift in Sources */,
 				15430F3C26FF0F8200546BB5 /* LoginViewModel.swift in Sources */,

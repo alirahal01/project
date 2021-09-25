@@ -49,17 +49,20 @@ class RegisterViewModel: ViewModelProtocol {
     init() {
         
         input = Input(email: emailSubject.asObserver(),
-                      password: passwordSubject.asObserver(), age: ageSubject.asObserver(),
+                      password: passwordSubject.asObserver(),
+                      age: ageSubject.asObserver(),
                       registerDidTap: registerDidTapSubject.asObserver())
         
         output = Output(RegisterResultObservable: RegisterResultObservableSubject.asObservable(),
-                        errorsObservable: errorsSubject.asObservable(), isValid: isValid.asObservable())
+                        errorsObservable: errorsSubject.asObservable(),
+                        isValid: isValid.asObservable())
         
         
-        Observable.combineLatest(emailSubject.asObservable(),passwordSubject.asObservable()){ email,password in
+        Observable.combineLatest(emailSubject.asObservable(),passwordSubject.asObservable(),ageSubject.asObservable()){ email,password,age in
             let passwordTextLengthValid = self.validateLength(text: password, size: (6,15))
             let validEmailFormat = self.validatePattern(text: email)
-            return passwordTextLengthValid && validEmailFormat
+            let validAge = age < 99 && age > 18
+            return passwordTextLengthValid && validEmailFormat && validAge
         }.bind(to: isValid).disposed(by: disposeBag)
         
         registerDidTapSubject

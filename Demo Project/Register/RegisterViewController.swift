@@ -1,22 +1,17 @@
 //
-//  LoginViewController.swift
+//  RegisterViewController.swift
 //  Demo Project
 //
 //  Created by Ali Rahal on 9/25/21.
 //
 
-import UIKit
+import Foundation
 import RxSwift
-import RxCocoa
+import UIKit
 
-protocol ControllerType: AnyObject {
-    associatedtype ViewModelType: ViewModelProtocol
-    func setupListners()
-}
-
-class LoginViewController: UIViewController, ControllerType {
+class RegisterViewController: UIViewController, ControllerType {
     
-    typealias ViewModelType = LoginViewModel
+    typealias ViewModelType = RegisterViewModel
     // MARK: - Properties
     public var viewModel: ViewModelType!
     private let disposeBag = DisposeBag()
@@ -24,13 +19,13 @@ class LoginViewController: UIViewController, ControllerType {
     // MARK: - IBOutlets
     @IBOutlet weak var passwordTextfield: UITextField!
     @IBOutlet weak var emailTextfield: UITextField!
-    @IBOutlet weak var signInButton: UIButton!
+    @IBOutlet weak var ageTextfield: UITextField!
     @IBOutlet weak var registerButton: UIButton!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.viewModel = LoginViewModel()
+        self.viewModel = RegisterViewModel()
         setupListners()
     }
     
@@ -44,17 +39,17 @@ class LoginViewController: UIViewController, ControllerType {
             .subscribe(viewModel.input.password)
             .disposed(by: disposeBag)
         
-        signInButton.rx.tap.asObservable()
-            .subscribe(viewModel.input.signInDidTap)
+        ageTextfield.rx.text.orEmpty
+            .map { Int($0) ?? 0 }
+            .asObservable()
+            .subscribe(viewModel.input.age)
             .disposed(by: disposeBag)
         
-        registerButton.rx.tap.subscribe { _ in
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let controller = storyboard.instantiateViewController(withIdentifier: "registerVC") as! RegisterViewController
-            self.navigationController?.pushViewController(controller, animated: true)
-        }.disposed(by: disposeBag)
+        registerButton.rx.tap.asObservable()
+            .subscribe(viewModel.input.registerDidTap)
+            .disposed(by: disposeBag)
         
-        viewModel.output.isValid.bind(to: self.signInButton.rx.isEnabled).disposed(by: disposeBag)
+        viewModel.output.isValid.bind(to: self.registerButton.rx.isEnabled).disposed(by: disposeBag)
         
         viewModel.output.isValid
             .subscribe(onNext: { (isValid) in
@@ -78,12 +73,7 @@ class LoginViewController: UIViewController, ControllerType {
                 print(user)
             })
             .disposed(by: disposeBag)
-        
-        viewModel.output.goToRegister
-            .subscribe(onNext: { [weak self] _ in
-                self?.navigationController?.pushViewController(RegisterViewController(), animated: true)
-            })
-            .disposed(by: disposeBag)
 
     }
 }
+
