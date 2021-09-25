@@ -7,33 +7,18 @@
 import RxSwift
 import RxCocoa
 
-struct Credentials {
+struct UserRegisterCredentials {
     let email: String
     let password: String
+    let age: String
 }
 
-struct User: Codable {
-    
-}
-
-/// Base for all controller viewModels.
-///
-/// It contains Input and Output types, usually expressed as nested structs inside a class implementation.
-///
-/// Input type should contain observers (e.g. AnyObserver) that should be subscribed to UI elements that emit input events.
-///
-/// Output type should contain observables that emit events related to result of processing of inputs.
-protocol ViewModelProtocol: AnyObject {
-    associatedtype Input
-    associatedtype Output
-}
-
-class LoginViewModel: ViewModelProtocol {
+class RegisterViewModel: ViewModelProtocol {
     struct Input {
         let email: AnyObserver<String>
         let password: AnyObserver<String>
         let age: AnyObserver<Int>
-        let signInDidTap: AnyObserver<Void>
+        let registerDidTap: AnyObserver<Void>
     }
     struct Output {
         let RegisterResultObservable: Observable<User>
@@ -48,8 +33,8 @@ class LoginViewModel: ViewModelProtocol {
     private let emailSubject = PublishSubject<String>()
     private let passwordSubject = PublishSubject<String>()
     private let ageSubject = PublishSubject<Int>()
-    private let signInDidTapSubject = PublishSubject<Void>()
-    private let RegisterResultSubject = PublishSubject<User>()
+    private let registerDidTapSubject = PublishSubject<Void>()
+    private let RegisterResultObservableSubject = PublishSubject<User>()
     private let errorsSubject = PublishSubject<Error>()
     private let disposeBag = DisposeBag()
     private var isValid = BehaviorSubject<Bool>(value: false)
@@ -65,20 +50,19 @@ class LoginViewModel: ViewModelProtocol {
         
         input = Input(email: emailSubject.asObserver(),
                       password: passwordSubject.asObserver(), age: ageSubject.asObserver(),
-                      signInDidTap: signInDidTapSubject.asObserver())
+                      registerDidTap: registerDidTapSubject.asObserver())
         
-        output = Output(RegisterResultObservable: RegisterResultSubject.asObservable(),
+        output = Output(RegisterResultObservable: RegisterResultObservableSubject.asObservable(),
                         errorsObservable: errorsSubject.asObservable(), isValid: isValid.asObservable())
         
         
-        Observable.combineLatest(emailSubject.asObservable(),passwordSubject.asObservable(),ageSubject.asObservable()){ email,password,age in
+        Observable.combineLatest(emailSubject.asObservable(),passwordSubject.asObservable()){ email,password in
             let passwordTextLengthValid = self.validateLength(text: password, size: (6,15))
             let validEmailFormat = self.validatePattern(text: email)
-            let validAge = age < 99 && age > 18
-            return passwordTextLengthValid && validEmailFormat && validAge
+            return passwordTextLengthValid && validEmailFormat
         }.bind(to: isValid).disposed(by: disposeBag)
         
-        signInDidTapSubject
+        registerDidTapSubject
             .withLatestFrom(credentialsObservable)
             .subscribe(onNext: { e in
                 print(e)
